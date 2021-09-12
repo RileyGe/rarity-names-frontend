@@ -89,7 +89,7 @@ export default function Home(): JSX.Element | null {
         await approve(selectedSummoner, SHOP_OWNER, '200000000000000000000')
     }
 
-    async function buy() {
+    async function claim() {
         await claim(claimName, selectedSummoner)
     }
 
@@ -198,10 +198,10 @@ export default function Home(): JSX.Element | null {
                             <div className="text-white my-4">
                                 {shopAllowance > 200 ? (
                                     <button
-                                        onClick={() => buy()}
+                                        onClick={() => claim()}
                                         className="px-8 bg-custom-selected border-4 rounded-lg text-white p-2 text-2xl"
                                     >
-                                        Buy
+                                        Claim
                                     </button>
                                 ) : (
                                     <button
