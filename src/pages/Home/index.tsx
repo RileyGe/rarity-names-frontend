@@ -99,6 +99,7 @@ export default function Home(): JSX.Element | null {
     async function claimNameFunction() {
         setClaiming(true)
         await claim(claimName, selectedSummoner)
+        fetch_balances()
         setClaiming(false)
     }
 

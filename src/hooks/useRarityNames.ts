@@ -39,7 +39,8 @@ export default function useRarityName(): NamesInterface {
     const claim = useCallback(
         async (_name: string, summoner): Promise<void> => {
             try {
-                return await name?.claim(_name, summoner)
+                const tx = await  name?.claim(_name, summoner)
+                return await tx.wait()
             } catch (e) {
                 return
             }
