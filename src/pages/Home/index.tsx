@@ -164,10 +164,10 @@ export default function Home(): JSX.Element | null {
                                     A-Z uppercase and numbers between 0 to 9{' '}
                                 </span>
                             </div>
-                            <div className="text-custom-background text-center my-4 ">
+                            <div className="text-custom-background text-center my-4">
                                 <input
                                     onChange={(v) => choosenName(v.target.value)}
-                                    className="border-custom-bg border-2 p-2"
+                                    className="border-custom-bg border-2 p-2 my-4"
                                 />
                             </div>
                             <div className="text-white my-4">
