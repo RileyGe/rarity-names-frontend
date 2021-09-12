@@ -2,6 +2,8 @@ import { useMulticall2Contract, useRarityNameContract } from './useContract'
 import { useCallback } from 'react'
 
 interface NamesInterface {
+    validate_name: (name: string) => Promise<boolean>
+    is_name_claimed: (name: string) => Promise<boolean>
     claim: (name: string, summoner: string) => Promise<void>
     summoner_name: (id: string) => Promise<string>
     multicall_summoner_name: (ids: string[]) => Promise<string[]>
@@ -11,6 +13,28 @@ export default function useRarityName(): NamesInterface {
     const name = useRarityNameContract()
 
     const multicall = useMulticall2Contract()
+
+    const validate_name = useCallback(
+        async (_name: string): Promise<boolean> => {
+            try {
+                return await name?.validate_name(_name)
+            } catch (e) {
+                return false
+            }
+        },
+        [name]
+    )
+
+    const is_name_claimed = useCallback(
+        async (_name: string): Promise<boolean> => {
+            try {
+                return await name?.is_name_claimed(_name)
+            } catch (e) {
+                return false
+            }
+        },
+        [name]
+    )
 
     const claim = useCallback(
         async (_name: string, summoner): Promise<void> => {
@@ -59,5 +83,5 @@ export default function useRarityName(): NamesInterface {
         [name, multicall]
     )
 
-    return { summoner_name, multicall_summoner_name, claim }
+    return { validate_name, is_name_claimed, summoner_name, multicall_summoner_name, claim }
 }

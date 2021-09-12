@@ -20,7 +20,7 @@ export default function Home(): JSX.Element | null {
 
     const [allowedSummoners, setAllowedSummoners] = useState<string[]>([])
 
-    const { multicall_summoner_name, claim } = useRarityName()
+    const { multicall_summoner_name, claim, validate_name, is_name_claimed } = useRarityName()
 
     const [names, setNames] = useState<{ [k: string]: string }>({})
 
@@ -91,6 +91,16 @@ export default function Home(): JSX.Element | null {
 
     async function buy() {
         await claim(claimName, selectedSummoner)
+    }
+
+    const [verifyStatus, setVerify] = useState('')
+
+    async function verify() {
+        const valid = await validate_name(claimName)
+        console.log(valid)
+        const claimed = await is_name_claimed(claimName)
+        console.log(claimed)
+        setVerify(valid && !claimed ? 'Valid' : !valid ? 'Invalid' : 'Unavilable')
     }
 
     /*
@@ -169,6 +179,21 @@ export default function Home(): JSX.Element | null {
                                     onChange={(v) => choosenName(v.target.value)}
                                     className="border-custom-bg border-2 p-2 my-4"
                                 />
+                                <button
+                                    className="bg-custom-selected p-2 mx-1 rounded-lg border-2 border-white text-white"
+                                    onClick={() => verify()}
+                                >
+                                    Verify
+                                </button>
+                                {verifyStatus !== '' && verifyStatus === 'Valid' ? (
+                                    <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-selected text-white">
+                                        {verifyStatus}
+                                    </span>
+                                ) : (
+                                    <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-red text-white">
+                                        {verifyStatus}
+                                    </span>
+                                )}
                             </div>
                             <div className="text-white my-4">
                                 {shopAllowance > 200 ? (
