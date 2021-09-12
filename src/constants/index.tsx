@@ -21,7 +21,7 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
 }
 
 export const RARITY_NAME_CONTRACT = {
-    [ChainId.MAINNET]: '0xE1Ef5bbF7E85d68753897924556AD0aDb6cf5D6a',
+    [ChainId.MAINNET]: '0xc73e1237a5a9ba5b0f790b6580f32d04a727dc19',
 }
 
 export function calcAPCost(score: number): number {
