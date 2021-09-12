@@ -33,7 +33,7 @@ export function useRarityGoldContract(): Contract | null {
     return useContract(chainId ? GOLD_CONTRACTS[chainId] : undefined, GOLD_ABI)
 }
 
-export function useMulticall2Contract() {
+export function useMulticall2Contract(): Contract | null {
     return useContract(MULTICALL2_ADDRESS, MULTICALL2_ABI, false)
 }
 

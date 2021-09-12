@@ -22,7 +22,7 @@ export default function useRarityGold(): GoldInterface {
                 return
             }
         },
-        [gold, multicall]
+        [gold]
     )
     const allowance = useCallback(
         async (from: string, spender: string): Promise<number> => {
@@ -33,7 +33,7 @@ export default function useRarityGold(): GoldInterface {
                 return 0
             }
         },
-        [gold, multicall]
+        [gold]
     )
 
     const summoners_balances = useCallback(

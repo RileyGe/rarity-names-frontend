@@ -53,7 +53,7 @@ export default function Home(): JSX.Element | null {
                 return s.id
             })
         )
-    }, [summoners])
+    }, [summoners, summoners_balances])
 
     useEffect(() => {
         fetch_balances()
@@ -72,7 +72,7 @@ export default function Home(): JSX.Element | null {
             const allowed = await allowance(selectedSummoner, SHOP_OWNER)
             setShopAllowance(allowed)
         }
-    }, [shopAllowance, allowance, selectedSummoner])
+    }, [allowance, selectedSummoner])
 
     useEffect(() => {
         if (!library || !chainId) return
@@ -164,7 +164,7 @@ export default function Home(): JSX.Element | null {
                                     A-Z uppercase and numbers between 0 to 9{' '}
                                 </span>
                             </div>
-                            <div className="text-custom-background text-center my-4">
+                            <div className="text-custom-background text-center my-4summoners_balances">
                                 <input
                                     onChange={(v) => choosenName(v.target.value)}
                                     className="border-custom-bg border-2 p-2 my-4"
