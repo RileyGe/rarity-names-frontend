@@ -4,7 +4,7 @@ export enum ChainId {
     MAINNET = 250,
 }
 
-export const SHOP_OWNER = "1672924"
+export const SHOP_OWNER = '1672924'
 
 export const NETWORK_ICON = {
     [ChainId.MAINNET]: Fantom,
@@ -20,21 +20,8 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
     [ChainId.MAINNET]: 'Fantom',
 }
 
-export const NAME = 'name'
-export const SYMBOL = 'symbol'
-export const DECIMALS = 'decimals'
-
-export const TOKENS: { [k: string]: { [NAME]: string; [SYMBOL]: string; [DECIMALS]: number } } = {
-    '0x83DA2674037d0BC070c3108D42e0595d84a1CC18': {
-        [NAME]: 'Rarity Crowns',
-        [SYMBOL]: 'CROWNS',
-        [DECIMALS]: 18,
-    },
-    '0xEc79983a0711D2C64e671ce56b64483875789008': {
-        [NAME]: 'Rarity Gold',
-        [SYMBOL]: 'GOLD',
-        [DECIMALS]: 18,
-    },
+export const RARITY_NAME_CONTRACT = {
+    [ChainId.MAINNET]: '0xE1Ef5bbF7E85d68753897924556AD0aDb6cf5D6a',
 }
 
 export function calcAPCost(score: number): number {

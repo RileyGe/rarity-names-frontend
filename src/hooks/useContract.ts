@@ -6,7 +6,9 @@ import { getContract } from '../utils'
 
 import MULTICALL2_ABI from '../constants/abis/multicall2.json'
 import GOLD_ABI from '../constants/abis/gold.json'
-import {GOLD_CONTRACTS, MULTICALL2_ADDRESS} from '../constants'
+import NAMES_ABI from '../constants/abis/names.json'
+
+import { GOLD_CONTRACTS, MULTICALL2_ADDRESS, RARITY_NAME_CONTRACT } from '../constants'
 
 export function useContract(
     address: string | undefined,
@@ -33,4 +35,9 @@ export function useRarityGoldContract(): Contract | null {
 
 export function useMulticall2Contract() {
     return useContract(MULTICALL2_ADDRESS, MULTICALL2_ABI, false)
+}
+
+export function useRarityNameContract(): Contract | null {
+    const { chainId } = useActiveWeb3React()
+    return useContract(chainId ? RARITY_NAME_CONTRACT[chainId] : undefined, NAMES_ABI)
 }
