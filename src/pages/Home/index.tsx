@@ -129,7 +129,7 @@ export default function Home(): JSX.Element | null {
 */}
                 <div className="bg-custom-green border-4 border-white w-3/4 mx-auto mt-8">
                     <div className="text-white my-4">
-                        <p>Buy a rarity name for your summoner</p>
+                        <p>Get a rarity name for your summoner.</p>
                     </div>
                     <div className="text-white my-4">
                         <p>Only summoners with more than 200 GOLD can buy a name</p>
@@ -161,7 +161,7 @@ export default function Home(): JSX.Element | null {
                             <div className="text-white text-xs w-2/4 mx-auto">
                                 <span>
                                     For names you can only use up to 25 chars, letters from a-z lowercase, letters from
-                                    A-Z uppercase and numbers between 0 to 9{' '}
+                                    A-Z uppercase and numbers between 0 to 9 and spaces are allowed{' '}
                                 </span>
                             </div>
                             <div className="text-custom-background text-center my-4summoners_balances">
