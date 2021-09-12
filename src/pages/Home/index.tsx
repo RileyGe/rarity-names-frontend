@@ -6,6 +6,8 @@ import useRarityName from '../../hooks/useRarityNames'
 import { CLASSES } from '../../constants/classes'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { SHOP_OWNER } from '../../constants'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 export default function Home(): JSX.Element | null {
     const { library, chainId } = useActiveWeb3React()
@@ -75,9 +77,9 @@ export default function Home(): JSX.Element | null {
     }, [allowance, selectedSummoner])
 
     useEffect(() => {
-        if (!library || !chainId) return
+        if (!library || !chainId || !allowance) return
         fetch_allowance()
-    }, [fetch_allowance, library, chainId])
+    }, [fetch_allowance, library, chainId, allowance])
 
     const [claimName, setClaimName] = useState('')
 
@@ -85,22 +87,31 @@ export default function Home(): JSX.Element | null {
         setClaimName(n)
     }
 
+    const [approving, setApproving] = useState(false)
     async function approveShop() {
+        setApproving(true)
         await approve(selectedSummoner, SHOP_OWNER, '200000000000000000000')
+        await fetch_allowance()
+        setApproving(false)
     }
 
+    const [claiming, setClaiming] = useState(false)
     async function claimNameFunction() {
+        setClaiming(true)
         await claim(claimName, selectedSummoner)
+        setClaiming(false)
     }
 
     const [verifyStatus, setVerify] = useState('')
-
+    const [verifying, setVerifying] = useState(false)
     async function verify() {
-        const valid = await validate_name(claimName)
-        console.log(valid)
-        const claimed = await is_name_claimed(claimName)
-        console.log(claimed)
-        setVerify(valid && !claimed ? 'Valid' : !valid ? 'Invalid' : 'Unavilable')
+        setVerifying(true)
+        const calls = []
+        calls.push(validate_name(claimName))
+        calls.push(is_name_claimed(claimName))
+        const responses = await Promise.all(calls)
+        setVerify(responses[0] && !responses[1] ? 'Valid' : !responses[0] ? 'Invalid' : 'Unavailable')
+        setVerifying(false)
     }
 
     /*
@@ -177,7 +188,7 @@ export default function Home(): JSX.Element | null {
                             <div className="text-custom-background text-center my-4summoners_balances">
                                 <input
                                     onChange={(v) => choosenName(v.target.value)}
-                                    className="border-custom-bg border-2 p-2 my-4"
+                                    className="border-custom-background border-2 p-2 my-4"
                                 />
                                 <button
                                     className="bg-custom-selected p-2 mx-1 rounded-lg border-2 border-white text-white"
@@ -185,14 +196,22 @@ export default function Home(): JSX.Element | null {
                                 >
                                     Verify
                                 </button>
-                                {verifyStatus !== '' && verifyStatus === 'Valid' ? (
+                                {verifying && (
+                                    <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-selected text-white">
+                                        <FontAwesomeIcon icon={faSpinner} spin />
+                                    </span>
+                                )}
+                                {!verifying && verifyStatus !== '' && verifyStatus === 'Valid' ? (
                                     <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-selected text-white">
                                         {verifyStatus}
                                     </span>
-                                ) : (
+                                ) : (!verifying && verifyStatus === 'Invalid') ||
+                                  (!verifying && verifyStatus === 'Unavailable') ? (
                                     <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-red text-white">
                                         {verifyStatus}
                                     </span>
+                                ) : (
+                                    <div />
                                 )}
                             </div>
                             <div className="text-white my-4">
@@ -201,14 +220,14 @@ export default function Home(): JSX.Element | null {
                                         onClick={() => claimNameFunction()}
                                         className="px-8 bg-custom-selected border-4 rounded-lg text-white p-2 text-2xl"
                                     >
-                                        Claim
+                                        {claiming ?  <FontAwesomeIcon icon={faSpinner} spin /> : <span>Claim</span>}
                                     </button>
                                 ) : (
                                     <button
                                         onClick={() => approveShop()}
                                         className="px-8 bg-custom-selected border-4 rounded-lg text-white p-2 text-2xl"
                                     >
-                                        Approve
+                                        {approving ? <FontAwesomeIcon icon={faSpinner} spin /> : <span>Approve</span>}
                                     </button>
                                 )}
                             </div>

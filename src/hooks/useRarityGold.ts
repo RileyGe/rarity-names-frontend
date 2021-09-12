@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { BigNumber } from 'ethers'
 
 interface GoldInterface {
-    approve: (from: string, spender: string, amount: string) => Promise<void>
+    approve: (from: string, spender: string, amount: string) => Promise<boolean>
     allowance: (from: string, spender: string) => Promise<number>
     summoners_balances: (ids: string[]) => Promise<{ id: string; balance: BigNumber }[]>
 }
@@ -14,12 +14,12 @@ export default function useRarityGold(): GoldInterface {
     const multicall = useMulticall2Contract()
 
     const approve = useCallback(
-        async (from: string, spender: string, amount: string): Promise<void> => {
+        async (from: string, spender: string, amount: string): Promise<boolean> => {
             try {
-                return gold?.approve(from, spender, amount)
+                const tx = await gold?.approve(from, spender, amount)
+                return tx.wait()
             } catch (e) {
-                console.log(e)
-                return
+                return false
             }
         },
         [gold]
@@ -29,7 +29,6 @@ export default function useRarityGold(): GoldInterface {
             try {
                 return gold?.allowance(from, spender)
             } catch (e) {
-                console.log(e)
                 return 0
             }
         },
