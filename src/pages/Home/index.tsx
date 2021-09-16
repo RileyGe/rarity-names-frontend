@@ -154,7 +154,7 @@ export default function Home(): JSX.Element | null {
                         <p>Get a rarity name for your summoner.</p>
                     </div>
                     <div className="text-white my-4">
-                        <p>Only summoners with more than 200 GOLD can buy a name</p>
+                        <p>Claiming a name will cost your summoner 200 GOLD</p>
                     </div>
                     <p className="w-full text-x text-white my-4">Select a summoner</p>
                     <select
