@@ -274,7 +274,7 @@ export default function WalletModal(): JSX.Element {
                     </HeaderRow>
                 ) : (
                     <HeaderRow>
-                        <HoverText>Connect to a wallet</HoverText>
+                        <HoverText>连接钱包</HoverText>
                     </HeaderRow>
                 )}
                 <ContentWrapper>

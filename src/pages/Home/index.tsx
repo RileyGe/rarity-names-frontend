@@ -122,7 +122,7 @@ export default function Home(): JSX.Element | null {
         <>
             <div className="w-full mb-4">
                 <img alt="sword" src={sword} className="mx-auto w-16 -mt-4 md:w-32" />
-                <h1 className="w-full text-x text-white my-4 text-center text-4xl">Rarity Names Shop</h1>
+                <h1 className="w-full text-x text-white my-4 text-center text-4xl">Rarity名字商店</h1>
             </div>
             <div className="w-full bg-custom-blue text-center h-screen p-4">
                 {/*
@@ -151,12 +151,12 @@ export default function Home(): JSX.Element | null {
 */}
                 <div className="bg-custom-green border-4 border-white w-3/4 mx-auto mt-8">
                     <div className="text-white my-4">
-                        <p>Get a rarity name for your summoner.</p>
+                        <p>给你的英雄选择一个名字</p>
                     </div>
                     <div className="text-white my-4">
-                        <p>Claiming a name will cost your summoner 200 GOLD</p>
+                        <p>获取一个名字需要200金币</p>
                     </div>
-                    <p className="w-full text-x text-white my-4">Select a summoner</p>
+                    <p className="w-full text-x text-white my-4">选择一名英雄</p>
                     <select
                         defaultValue={0}
                         className="p-2 border-custom-green border-4 rounded-lg"
@@ -166,7 +166,7 @@ export default function Home(): JSX.Element | null {
                             }
                         }}
                     >
-                        <option value={0}>Select summoner</option>
+                        <option value={0}>选择一名英雄</option>
                         {allowedSummoners.map((summoner) => {
                             return (
                                 <option key={summoner} value={JSON.stringify(summoner)}>
@@ -178,12 +178,11 @@ export default function Home(): JSX.Element | null {
                     {selectedSummoner !== '' && (
                         <>
                             <div className="text-white my-4">
-                                Select your name for {parseInt(selectedSummoner, 16).toString()}
+                                给你编号为 {parseInt(selectedSummoner, 16).toString()} 的英雄选择一个名字
                             </div>
                             <div className="text-white text-xs w-2/4 mx-auto">
                                 <span>
-                                    For names you can only use up to 25 chars, letters from a-z lowercase, letters from
-                                    A-Z uppercase and numbers between 0 to 9 and spaces are allowed{' '}
+                                    英雄名字最多有25个字母，可以包含大写字母(A-Z)，小写字母(a-z)，数字(0-9)和空格
                                 </span>
                             </div>
                             <div className="text-custom-background text-center my-4summoners_balances">
@@ -195,7 +194,7 @@ export default function Home(): JSX.Element | null {
                                     className="bg-custom-selected p-2 mx-1 rounded-lg border-2 border-white text-white"
                                     onClick={() => verify()}
                                 >
-                                    Verify
+                                    检查
                                 </button>
                                 {verifying && (
                                     <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-selected text-white">
@@ -204,12 +203,14 @@ export default function Home(): JSX.Element | null {
                                 )}
                                 {!verifying && verifyStatus !== '' && verifyStatus === 'Valid' ? (
                                     <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-selected text-white">
-                                        {verifyStatus}
+                                        {/*{verifyStatus}*/}
+                                        可用
                                     </span>
                                 ) : (!verifying && verifyStatus === 'Invalid') ||
                                   (!verifying && verifyStatus === 'Unavailable') ? (
                                     <span className="p-2 border-2 rounded-lg border-custom-background bg-custom-red text-white">
-                                        {verifyStatus}
+                                        {/*{verifyStatus}*/}
+                                        不可用
                                     </span>
                                 ) : (
                                     <div />
@@ -221,14 +222,14 @@ export default function Home(): JSX.Element | null {
                                         onClick={() => claimNameFunction()}
                                         className="px-8 bg-custom-selected border-4 rounded-lg text-white p-2 text-2xl"
                                     >
-                                        {claiming ?  <FontAwesomeIcon icon={faSpinner} spin /> : <span>Claim</span>}
+                                        {claiming ?  <FontAwesomeIcon icon={faSpinner} spin /> : <span>获取名字</span>}
                                     </button>
                                 ) : (
                                     <button
                                         onClick={() => approveShop()}
                                         className="px-8 bg-custom-selected border-4 rounded-lg text-white p-2 text-2xl"
                                     >
-                                        {approving ? <FontAwesomeIcon icon={faSpinner} spin /> : <span>Approve</span>}
+                                        {approving ? <FontAwesomeIcon icon={faSpinner} spin /> : <span>批准合约</span>}
                                     </button>
                                 )}
                             </div>

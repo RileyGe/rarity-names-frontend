@@ -272,7 +272,7 @@ export default function WalletStandalone() {
                     </HeaderRow>
                 ) : (
                     <HeaderRow>
-                        <HoverText>Connect to a wallet</HoverText>
+                        <HoverText>连接钱包</HoverText>
                     </HeaderRow>
                 )}
                 <ContentWrapper>

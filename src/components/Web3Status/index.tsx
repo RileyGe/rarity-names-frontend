@@ -71,7 +71,7 @@ function Web3StatusInner() {
                 className="border-2 border-white rounded-lg p-2 m-2"
                 onClick={toggleWalletModal}
             >
-                <p>Connect to a wallet</p>
+                <p>连接钱包</p>
             </button>
         )
     }
