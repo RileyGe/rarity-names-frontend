@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Work Sans';
-    src: url('../assets/fonts/work_sans_bold.ttf');
+    src: url('../assets/fonts/fzyt.ttf');
 }
 
 @font-face {
     font-family: 'IBM Plex Mono';
-    src: url('../assets/fonts/ibm_plex_mono.ttf');
+    src: url('../assets/fonts/fzlbjt.ttf');
 }
 
 body{
